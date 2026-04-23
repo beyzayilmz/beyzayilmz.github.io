@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beyza Yılmaz — Bilgisayar Mühendisi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    /* ── SCROLL SNAP ── */
+    .right {
+      scroll-snap-type: y mandatory;
+      overflow-y: scroll;
+      height: 100vh;
+    }
+
+    .section, .footer-section {
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+
+    :root {
+      --bg: #09090b;
+      --surface: #111113;
+      --surface2: #18181b;
+      --border: rgba(255,255,255,0.06);
+      --border2: rgba(255,255,255,0.12);
+      --accent: #f97316;
+      --accent2: #ea580c;
+      --accent-glow: rgba(249,115,22,0.12);
+      --green: #84cc16;
+      --green-glow: rgba(132,204,22,0.12);
+      --text: #e4e4e7;
+      --muted: #52525b;
+      --muted2: #a1a1aa;
+      --sans: 'DM Sans', sans-serif;
+      --display: 'Bebas Neue', sans-serif;
+      --mono: 'Space Mono', monospace;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* ── LEFT PANEL ─────────────────────────────── */
+    .left {
+      position: fixed;
+      top: 0; left: 0;
+      width: 380px;
+      height: 100vh;
+      padding: 52px 44px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid var(--border);
+      overflow: hidden;
+      z-index: 10;
+    }
+
+    .left::before {
+      content: '';
+      position: absolute;
+      top: -60px; left: -60px;
+      width: 260px; height: 260px;
+      background: radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .left-top {}
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--green);
+      background: var(--green-glow);
+      border: 1px solid rgba(132,204,22,0.25);
+      border-radius: 20px;
+      padding: 4px 11px;
+      margin-bottom: 28px;
+      letter-spacing: 0.06em;
+    }
+
+    .status-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: blink 2s infinite;
+    }
+
+    @keyframes blink {
+      0%,100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .left h1 {
+      font-family: var(--display);
+      font-size: 52px;
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: 0.02em;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .left h1 span {
+      color: var(--accent);
+    }
+
+    .left-role {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted2);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .left-bio {
+      font-size: 13.5px;
+      color: var(--muted2);
+      line-height: 1.75;
+      margin-bottom: 32px;
+    }
+
+    /* NAV */
+    .left-nav {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 36px;
+    }
+
+    .left-nav a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted2);
+      text-decoration: none;
+      transition: all 0.2s;
+      letter-spacing: 0.01em;
+    }
+
+    .left-nav a .nav-line {
+      width: 24px; height: 1px;
+      background: var(--muted);
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .left-nav a:hover,
+    .left-nav a.active {
+      color: #fff;
+    }
+
+    .left-nav a:hover .nav-line,
+    .left-nav a.active .nav-line {
+      width: 40px;
+      background: var(--accent);
+    }
+
+    .left-nav a.active {
+      background: rgba(167,139,250,0.06);
+    }
+
+    /* SOCIAL */
+    .left-social {
+      display: flex;
+      gap: 14px;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px; height: 34px;
+      border: 1px solid var(--border2);
+      border-radius: 8px;
+      color: var(--muted2);
+      text-decoration: none;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 700;
+      transition: all 0.2s;
+    }
+
+    .social-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-glow);
+    }
+
+    .social-link svg {
+      width: 15px; height: 15px;
+      fill: currentColor;
+    }
+
+    /* ── RIGHT CONTENT ───────────────────────────── */
+    .right {
+      margin-left: 380px;
+      flex: 1;
+      max-width: 860px;
+    }
+
+    /* SECTION */
+    .section {
+      min-height: 100vh;
+      padding: 72px 64px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .section:last-child { border-bottom: none; }
+
+    .section-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 48px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border2);
+    }
+
+    /* ABOUT */
+    #about .big-text {
+      font-family: var(--display);
+      font-size: clamp(42px, 5vw, 64px);
+      font-weight: 400;
+      line-height: 1.0;
+      letter-spacing: 0.03em;
+      color: #fff;
+      margin-bottom: 28px;
+    }
+
+    #about .big-text em {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    #about p {
+      font-size: 15px;
+      color: var(--muted2);
+      line-height: 1.8;
+      max-width: 600px;
+      margin-bottom: 16px;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 44px;
+    }
+
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      transition: border-color 0.2s;
+    }
+
+    .stat-card:hover { border-color: var(--border2); }
+
+    .stat-num {
+      font-family: var(--display);
+      font-size: 44px;
+      font-weight: 400;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 6px;
+      letter-spacing: 0.03em;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--muted2);
+    }
+
+    /* EXPERIENCE */
+    .exp-list { display: flex; flex-direction: column; gap: 0; }
+
+    .exp-item {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 24px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      transition: all 0.2s;
+      cursor: default;
+    }
+
+    .exp-item:first-child { padding-top: 0; }
+    .exp-item:last-child { border-bottom: none; }
+
+    .exp-item:hover .exp-right { transform: translateX(4px); }
+
+    .exp-date-col {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.5;
+      padding-top: 3px;
+      letter-spacing: 0.03em;
+    }
+
+    .exp-right { transition: transform 0.2s; }
+
+    .exp-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 4px;
+      flex-wrap: wrap;
+    }
+
+    .exp-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .exp-company {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent);
+      margin-bottom: 12px;
+      letter-spacing: 0.03em;
+    }
+
+    .exp-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .exp-bullets li {
+      font-size: 13px;
+      color: var(--muted2);
+      line-height: 1.65;
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .exp-bullets li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 9px;
+      top: 5px;
+    }
+
+    .exp-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 14px;
+    }
+
+    .exp-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 3px 9px;
+      background: var(--accent-glow);
+      border: 1px solid rgba(167,139,250,0.2);
+      border-radius: 20px;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: all 0.25s;
+      cursor: default;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--green));
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+
+    .project-card:hover {
+      border-color: var(--border2);
+      transform: translateY(-3px);
+    }
+
+    .project-card:hover::before { opacity: 1; }
+
+    .project-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .project-icon-box {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      background: var(--surface2);
+      border: 1px solid var(--border2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .project-year-badge {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3px 9px;
+    }
+
+    .project-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .project-desc {
+      font-size: 12px;
+      color: var(--muted2);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .project-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .stack-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 3px 8px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      color: var(--muted2);
+    }
+
+    .project-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 4px;
+    }
+
+    .project-link {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+
+    .project-link:hover { text-decoration: underline; }
+
+    /* SKILLS */
+    .skills-groups {
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
+
+    .skill-group-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .skills-wrap {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 10px;
+    }
+
+    .skill-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      transition: all 0.2s;
+      cursor: default;
+    }
+
+    .skill-card:hover {
+      border-color: var(--accent);
+      background: var(--accent-glow);
+    }
+
+    .skill-card:hover .skill-card-name { color: var(--accent); }
+
+    .skill-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .skill-icon svg {
+      width: 22px; height: 22px;
+    }
+
+    .skill-card-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
+      transition: color 0.2s;
+    }
+
+    .skill-card-sub {
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 1px;
+    }
+
+    /* CONTACT */
+    .contact-cta {
+      font-family: var(--display);
+      font-size: clamp(48px, 6vw, 80px);
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      color: #fff;
+      line-height: 0.95;
+      margin-bottom: 20px;
+    }
+
+    .contact-cta span { color: var(--accent); }
+
+    .contact-sub {
+      font-size: 15px;
+      color: var(--muted2);
+      line-height: 1.7;
+      max-width: 480px;
+      margin-bottom: 40px;
+    }
+
+    .contact-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--accent);
+      text-decoration: none;
+      border: 1px solid rgba(167,139,250,0.3);
+      border-radius: 8px;
+      padding: 14px 22px;
+      transition: all 0.2s;
+      background: var(--accent-glow);
+      margin-bottom: 48px;
+    }
+
+    .contact-email:hover {
+      background: rgba(167,139,250,0.2);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .contact-links-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .contact-link-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--muted2);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .contact-link-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* FOOTER */
+    .footer-section {
+      padding: 40px 64px 52px;
+      scroll-snap-align: start;
+    }
+
+    .footer-text {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* SCROLL INDICATOR */
+    .scroll-progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      background: var(--accent);
+      z-index: 999;
+      transition: width 0.1s;
+    }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+      body { flex-direction: column; }
+      .left {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 40px 24px 32px;
+      }
+      .right { margin-left: 0; }
+      .section { padding: 60px 24px; }
+      .footer-section { padding: 40px 24px 52px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="scroll-progress" id="progress"></div>
+
+  <!-- ── LEFT PANEL ── -->
+  <aside class="left">
+    <div class="left-top">
+      <div class="status">
+        <span class="status-dot"></span>
+        staj başvurularına açık
+      </div>
+
+      <h1>Beyza<br><span>Yılmaz</span></h1>
+      <div class="left-role">Bilgisayar Mühendisliği · 3. Sınıf</div>
+
+      <p class="left-bio">
+        Robotik, otonom sistemler ve yapay zeka üzerine projeler geliştiriyorum. TEKNOFEST yarışmacısı, AI Agent geliştiricisi.
+      </p>
+
+      <ul class="left-nav">
+        <li>
+          <a href="#about" class="active" data-section="about">
+            <span class="nav-line"></span>
+            HAKKIMDA
+          </a>
+        </li>
+        <li>
+          <a href="#projects" data-section="projects">
+            <span class="nav-line"></span>
+            PROJELER
+          </a>
+        </li>
+        <li>
+          <a href="#experience" data-section="experience">
+            <span class="nav-line"></span>
+            DENEYİM
+          </a>
+        </li>
+        <li>
+          <a href="#skills" data-section="skills">
+            <span class="nav-line"></span>
+            BECERİLER
+          </a>
+        </li>
+        <li>
+          <a href="#contact" data-section="contact">
+            <span class="nav-line"></span>
+            İLETİŞİM
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="left-social">
+      <a href="https://github.com/beyzayilmz" target="_blank" class="social-link" title="GitHub">
+        <svg viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/beyza-yilmaz-11b86b293/" target="_blank" class="social-link" title="LinkedIn">
+        <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      <a href="mailto:yilmazbeyzza@gmail.com" class="social-link" title="E-posta">
+        <svg viewBox="0 0 24 24"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-.29.076-.56.211-.795L12 13.18 23.789 4.662c.135.235.211.505.211.795z"/></svg>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ── RIGHT CONTENT ── -->
+  <main class="right">
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="section-label">hakkımda</div>
+
+      <p class="big-text">
+        Otonom sistemler ve <em>yapay zeka</em> ile<br>geleceği kodluyorum.
+      </p>
+
+      <p>Kocaeli Üniversitesi Bilgisayar Mühendisliği 3. sınıf öğrencisiyim. ROS tabanlı navigasyondan derin öğrenmeye, LLM tabanlı AI Agent geliştirmeden gömülü sistemlere kadar geniş bir yelpazede projeler üretiyorum.</p>
+      <p>TEKNOFEST'te iki farklı kategoride yarıştım — Havacılıkta Yapay Zeka (yarı finalist) ve Robotaksi Otonom Araç. Stajımda DeepSeek LLM destekli otonom AI Agent geliştirdim.</p>
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-num">2×</div>
+          <div class="stat-label">TEKNOFEST Deneyimi</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">6+</div>
+          <div class="stat-label">Tamamlanan Proje</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">3+</div>
+          <div class="stat-label">Programlama Dili</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="section" id="projects">
+      <div class="section-label">seçilmiş projeler</div>
+
+      <div class="projects-grid">
+
+        <div class="project-card">
+          <div class="project-card-top">
+            <div class="project-icon-box">⚙</div>
+            <span class="project-year-badge">2026</span>
+          </div>
+          <div class="project-name">ProcX Operating System</div>
+          <p class="project-desc">Çok süreçli ve çok iş parçacıklı sistem mimarisi. Shared memory, message queue ve semaphore tabanlı senkronizasyon uygulandı.</p>
+          <div class="project-stack">
+            <span class="stack-tag">C</span>
+            <span class="stack-tag">Linux</span>
+            <span class="stack-tag">IPC</span>
+            <span class="stack-tag">Multithreading</span>
+          </div>
+          <div class="project-footer">
+            <a href="https://github.com/beyzayilmz" target="_blank" class="project-link">github →</a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card-top">
+            <div class="project-icon-box">🏢</div>
+            <span class="project-year-badge">2026</span>
+          </div>
+          <div class="project-name">Apartment Management System</div>
+          <p class="project-desc">Kullanıcı, daire, borç ve ödeme yönetimini kapsayan full-stack uygulama. Rol bazlı yetkilendirme sistemi içeriyor.</p>
+          <div class="project-stack">
+            <span class="stack-tag">Spring Boot</span>
+            <span class="stack-tag">MS SQL Server</span>
+            <span class="stack-tag">HTML/CSS</span>
+          </div>
+          <div class="project-footer">
+            <a href="https://github.com/beyzayilmz" target="_blank" class="project-link">github →</a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card-top">
+            <div class="project-icon-box">🚦</div>
+            <span class="project-year-badge">2025</span>
+          </div>
+          <div class="project-name">Traffic Sign Classification</div>
+          <p class="project-desc">CNN ve XGBoost modelleri karşılaştırıldı; YOLO ile gerçek zamanlı trafik levhası tespit sistemi kuruldu.</p>
+          <div class="project-stack">
+            <span class="stack-tag">Python</span>
+            <span class="stack-tag">OpenCV</span>
+            <span class="stack-tag">CNN</span>
+            <span class="stack-tag">YOLO</span>
+          </div>
+          <div class="project-footer">
+            <a href="https://github.com/beyzayilmz" target="_blank" class="project-link">github →</a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card-top">
+            <div class="project-icon-box">👤</div>
+            <span class="project-year-badge">2025</span>
+          </div>
+          <div class="project-name">Face Recognition System</div>
+          <p class="project-desc">Gerçek zamanlı yüz tespiti ve tanıma. Farklı ışık koşullarında doğruluğu optimize eden derin öğrenme tabanlı motor.</p>
+          <div class="project-stack">
+            <span class="stack-tag">Python</span>
+            <span class="stack-tag">OpenCV</span>
+            <span class="stack-tag">Deep Learning</span>
+          </div>
+          <div class="project-footer">
+            <a href="https://github.com/beyzayilmz" target="_blank" class="project-link">github →</a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card-top">
+            <div class="project-icon-box">💊</div>
+            <span class="project-year-badge">2025</span>
+          </div>
+          <div class="project-name">Smart Medicine Box</div>
+          <p class="project-desc">STM32 mikrodenetleyici ile geliştirilen akıllı ilaç kutusu. Sensör entegrasyonu ve gerçek zamanlı kontrol.</p>
+          <div class="project-stack">
+            <span class="stack-tag">STM32</span>
+            <span class="stack-tag">Embedded C</span>
+            <span class="stack-tag">Sensors</span>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-card-top">
+            <div class="project-icon-box">🗺</div>
+            <span class="project-year-badge">2025</span>
+          </div>
+          <div class="project-name">Treasure Hunt Adventure</div>
+          <p class="project-desc">Multi-linked list, BST ve dosyalama yapıları kullanılarak geliştirilmiş masaüstü tabanlı Java macera oyunu.</p>
+          <div class="project-stack">
+            <span class="stack-tag">Java</span>
+            <span class="stack-tag">Swing</span>
+            <span class="stack-tag">Data Structures</span>
+          </div>
+          <div class="project-footer">
+            <a href="https://github.com/beyzayilmz" target="_blank" class="project-link">github →</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="section" id="experience">
+      <div class="section-label">deneyim</div>
+
+      <div class="exp-list">
+
+        <div class="exp-item">
+          <div class="exp-date-col">Eki 2025<br>— devam</div>
+          <div class="exp-right">
+            <div class="exp-top">
+              <div class="exp-title">Kontrol &amp; Planlama Ekibi Üyesi</div>
+            </div>
+            <div class="exp-company">TEKNOFEST — Robotaksi Binek Otonom Araç Yarışması</div>
+            <ul class="exp-bullets">
+              <li>Şehir içi trafik senaryolarında güvenli hareket sağlayan yol planlama ve karar verme mekanizmaları geliştiriliyor.</li>
+              <li>Şerit takibi ve dinamik rotalar için düşük seviyeli araç kontrol algoritmaları tasarlanıyor ve test ediliyor.</li>
+              <li>ROS ortamında LiDAR ve kamera verileri işlenerek simülasyon testleri ve performans optimizasyonları yürütülüyor.</li>
+            </ul>
+            <div class="exp-tags">
+              <span class="exp-tag">ROS</span>
+              <span class="exp-tag">LiDAR</span>
+              <span class="exp-tag">C++</span>
+              <span class="exp-tag">Otonom Sistemler</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-date-col">Tem 2025<br>— Ağu 2025</div>
+          <div class="exp-right">
+            <div class="exp-top">
+              <div class="exp-title">Stajyer Bilgisayar Mühendisi (AR-GE)</div>
+            </div>
+            <div class="exp-company">UTIENCE AŞ</div>
+            <ul class="exp-bullets">
+              <li>DeepSeek LLM destekli, görev odaklı ve otonom çalışabilen bir AI Agent geliştirildi.</li>
+              <li>Prompt Engineering ve Context Engineering teknikleri ile model doğruluğu optimize edildi.</li>
+              <li>Bağlam yönetimi ve görev zincirleme mimarileri üzerine AR-GE çalışmaları yürütüldü.</li>
+            </ul>
+            <div class="exp-tags">
+              <span class="exp-tag">LLM</span>
+              <span class="exp-tag">AI Agent</span>
+              <span class="exp-tag">Prompt Engineering</span>
+              <span class="exp-tag">DeepSeek</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-date-col">Ara 2024<br>— Haz 2025</div>
+          <div class="exp-right">
+            <div class="exp-top">
+              <div class="exp-title">Yapay Zeka &amp; Görüntü İşleme Geliştirici</div>
+            </div>
+            <div class="exp-company">TEKNOFEST Havacılıkta Yapay Zeka — LUKA Takımı · Yarı Finalist</div>
+            <ul class="exp-bullets">
+              <li>İHA görüntülerinden insan, taşıt ve iniş alanı tespiti için YOLO + OpenCV tabanlı gerçek zamanlı modeller geliştirildi.</li>
+              <li>Piksel koordinatlarını kamera matrisleri ile gerçek dünya koordinatlarına dönüştüren konumlandırma algoritmaları tasarlandı.</li>
+              <li>Veri artırma (augmentation) ve etiketleme süreçleri yönetildi; ÖTR aşaması başarıyla tamamlandı.</li>
+            </ul>
+            <div class="exp-tags">
+              <span class="exp-tag">YOLO</span>
+              <span class="exp-tag">OpenCV</span>
+              <span class="exp-tag">Python</span>
+              <span class="exp-tag">Bilgisayarlı Görü</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="section" id="skills">
+      <div class="section-label">beceriler</div>
+
+      <div class="skills-groups">
+
+        <div>
+          <div class="skill-group-label">programlama dilleri</div>
+          <div class="skills-wrap">
+
+            <div class="skill-card">
+              <div class="skill-icon" style="background:#3776AB;">
+                <svg viewBox="0 0 24 24" fill="#FFD43B"><path d="M11.914 0C5.82 0 6.2 2.656 6.2 2.656l.007 2.752h5.814v.826H3.9S0 5.789 0 11.969c0 6.18 3.403 5.96 3.403 5.96h2.031v-2.867s-.109-3.42 3.35-3.42h5.766s3.24.052 3.24-3.13V3.19S18.28 0 11.914 0zm-3.2 1.843a1.043 1.043 0 1 1 0 2.086 1.043 1.043 0 0 1 0-2.086z"/><path d="M12.086 24c6.094 0 5.714-2.656 5.714-2.656l-.007-2.752h-5.814v-.826h8.121S24 18.211 24 12.031c0-6.18-3.403-5.96-3.403-5.96h-2.031v2.867s.109 3.42-3.35 3.42H9.45s-3.24-.052-3.24 3.13v5.322S5.72 24 12.086 24zm3.2-1.843a1.043 1.043 0 1 1 0-2.086 1.043 1.043 0 0 1 0 2.086z"/></svg>
+              </div>
+              <div><div class="skill-card-name">Python</div><div class="skill-card-sub">Ana dil</div></div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-icon" style="background:#007396;">
+                <svg viewBox="0 0 24 24" fill="#fff"><path d="M8.851 18.56s-.917.534.653.714c1.902.218 2.874.187 4.969-.211 0 0 .552.346 1.321.646-4.699 2.013-10.633-.118-6.943-1.149M8.276 15.933s-1.028.761.542.924c2.032.209 3.636.227 6.413-.308 0 0 .384.389.987.602-5.679 1.661-12.007.13-7.942-1.218M13.116 11.475c1.158 1.333-.304 2.533-.304 2.533s2.939-1.518 1.589-3.418c-1.261-1.772-2.228-2.652 3.007-5.688 0 0-8.216 2.051-4.292 6.573M19.33 20.504s.679.559-.747.991c-2.712.822-11.288 1.070-13.669.033-.856-.373.75-.89 1.254-.998.526-.114.828-.093.828-.093-.953-.671-6.156 1.317-2.643 1.887 9.58 1.553 17.462-.7 14.977-1.82M9.292 13.21s-4.362 1.036-1.544 1.412c1.189.159 3.561.123 5.77-.062 1.806-.152 3.618-.477 3.618-.477s-.637.272-1.098.587c-4.429 1.165-12.986.623-10.522-.568 2.082-1.006 3.776-.892 3.776-.892M17.116 17.584c4.503-2.34 2.421-4.589.968-4.285-.355.074-.515.138-.515.138s.132-.207.385-.297c2.875-1.011 5.086 2.981-.928 4.562 0 .001.07-.062.09-.118M14.401 0s2.494 2.494-2.365 6.33c-3.896 3.077-.888 4.832-.001 6.836-2.274-2.053-3.943-3.858-2.824-5.539 1.644-2.469 6.197-3.665 5.19-7.627M9.734 23.924c4.322.277 10.959-.153 11.116-2.198 0 0-.302.775-3.572 1.391-3.688.694-8.239.613-10.937.168 0 0 .553.457 3.393.639"/></svg>
+              </div>
+              <div><div class="skill-card-name">Java</div><div class="skill-card-sub">OOP / Backend</div></div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-icon" style="background:#A8B9CC;">
+                <svg viewBox="0 0 24 24" fill="#fff"><path d="M16.346 17.5h-1.962l-.817-2.169H9.917L9.1 17.5H7.189L10.908 7.5h1.714zm-3.381-3.752-1.436-3.948-1.429 3.948zM12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0z"/></svg>
+              </div>
+              <div><div class="skill-card-name">C</div><div class="skill-card-sub">Sistem prog.</div></div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-icon" style="background:#00599C;">
+                <svg viewBox="0 0 24 24" fill="#fff"><path d="M10.5 15.97l.41 2.44c-.26.14-.68.27-1.24.39-.57.13-1.24.2-2.01.2-2.21-.04-3.87-.7-4.98-1.96C1.56 15.77 1 14.16 1 12.19c.05-2.29.72-4.08 2-5.38 1.29-1.3 2.98-1.95 5.08-1.95.76 0 1.42.07 1.97.19.56.13.97.27 1.24.43l-.4 2.5-.71-.26c-.29-.1-.63-.15-1.03-.15-1.07.02-1.9.35-2.48 1.01-.58.65-.88 1.6-.9 2.85.02 1.17.3 2.08.86 2.72.56.65 1.38.99 2.47 1.01l1.03-.12.36-.22zM17 10h2v2h-2v2h-2v-2h-2v-2h2V8h2v2zm-6 0h2v2h-2v2H9v-2H7v-2h2V8h2v2z"/></svg>
+              </div>
+              <div><div class="skill-card-name">C++</div><div class="skill-card-sub">ROS / Robotik</div></div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-icon" style="background:#4479A1;">
+                <svg viewBox="0 0 24 24" fill="#fff"><path d="M16.405 5.501c-.115 0-.193.014-.274.033v.013h.014c.054.104.146.18.214.273.054.107.1.214.154.32l.014-.015c.094-.066.14-.172.14-.333-.04-.047-.046-.094-.08-.14-.04-.047-.1-.08-.182-.151zm-.784 3.404c.0 0-.027.013-.027.027.04.067.08.133.12.2l.12.2-.027.027c-.04-.04-.067-.067-.094-.107-.067-.094-.12-.2-.174-.306l.04-.04c.027 0 .027 0 .04-.014z"/></svg>
+              </div>
+              <div><div class="skill-card-name">SQL</div><div class="skill-card-sub">Veritabanı</div></div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-icon" style="background:#E34F26;">
+                <svg viewBox="0 0 24 24" fill="#fff"><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/></svg>
+              </div>
+              <div><div class="skill-card-name">HTML / CSS</div><div class="skill-card-sub">Web</div></div>
+            </div>
+
+          </div>
+        </div>
+
+        <div>
+          <div class="skill-group-label">yapay zeka / makine öğrenmesi</div>
+          <div class="skills-wrap">
+
+            <div class="skill-card">
+              <div class="skill-icon" style="background:#5C3EE8;">
+                <svg viewBox="0 0 24 24" fill="#fff"><path d="M5.77 10.776L0 6.156l5.77-4.62V0L0 4.62v3.072l5.77 4.62v-1.536zm12.46 0l5.77-4.62-5.77-4.62V0l5.77 4.62v3.072l-5.77 4.62v-1.536zm-4.117 2.539l1.485-.386-3.096-11.933-1.485.386z"/></svg>
+              </div>
+              <div><div class="skill-card-name">OpenCV</div><div class="skill-card-sub">Image Processing</div></div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-icon" style="background:#FF6F00;">
+                <svg viewBox="0 0 24 24" fill="#fff"><path d="M1.292 5.856L11.54 0l10.299 5.856v11.712L11.54 23.424 1.292 17.568zm10.38 1.625L6.74 10.396l4.932 2.915 4.931-2.915zm.612 9.376V12.75l4.337-2.565v5.126zm-1.224 0L6.723 15.31V10.19l4.337 2.56zm-5.249-7.767L1.904 11.22v5.13l3.907 2.315zm10.436 0v-2.13L12.54 9.285l-3.7-2.193-3.7 2.193-3.707-2.128-.003-.003.003-.003 9.407-5.35 9.252 5.258z"/></svg>
+              </div>
+              <div><div class="skill-card-name">TensorFlow</div><div class="skill-card-sub">Deep Learning</div></div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-icon" style="background:#00FFFF; border-radius:8px;">
+                <svg viewBox="0 0 24 24" fill="#000"><path d="M0 0v24h24V0zm12.2 5.4c3.7 0 6.2 1.7 6.2 1.7l-1.6 2.5s-1.9-1.2-4.5-1.2c-3.2 0-5.2 2-5.2 4.9 0 2.9 2 4.7 5.2 4.7 2.1 0 4-.9 4-.9v-2.2h-3.1V12h6v6.4s-2.6 1.2-6.2 1.2c-5.2 0-8.5-3.2-8.5-7.3-.1-4.3 3.4-6.9 7.7-6.9z"/></svg>
+              </div>
+              <div><div class="skill-card-name">YOLO</div><div class="skill-card-sub">Object Detection</div></div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-icon" style="background:#013243;">
+                <svg viewBox="0 0 24 24" fill="#4DABCF"><path d="M11.584 0C5.456 0 .336 5.12.336 11.248c0 6.128 5.12 11.248 11.248 11.248 6.128 0 11.248-5.12 11.248-11.248C22.832 5.12 17.712 0 11.584 0zm0 1.344c5.39 0 9.904 4.514 9.904 9.904S16.974 21.152 11.584 21.152 1.68 16.638 1.68 11.248 6.194 1.344 11.584 1.344zm0 2.016a7.888 7.888 0 0 0-7.888 7.888 7.888 7.888 0 0 0 7.888 7.888 7.888 7.888 0 0 0 7.888-7.888 7.888 7.888 0 0 0-7.888-7.888z"/></svg>
+              </div>
+              <div><div class="skill-card-name">LLM / AI Agent</div><div class="skill-card-sub">DeepSeek, GPT</div></div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-icon" style="background:#150458;">
+                <svg viewBox="0 0 24 24" fill="#E70488"><path d="M11.584 0C5.456 0 .336 5.12.336 11.248c0 6.128 5.12 11.248 11.248 11.248 6.128 0 11.248-5.12 11.248-11.248C22.832 5.12 17.712 0 11.584 0zm.8 5.696l3.808 6.576-3.808 6.576H8.576L4.768 12.272l3.808-6.576z"/></svg>
+              </div>
+              <div><div class="skill-card-name">XGBoost</div><div class="skill-card-sub">ML Model</div></div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-icon" style="background:#EE4C2C;">
+                <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-.535 4.784h1.07l.802 8.7-1.337.116zM12 17.52a1.44 1.44 0 1 1 0-2.88 1.44 1.44 0 0 1 0 2.88z"/></svg>
+              </div>
+              <div><div class="skill-card-name">PyTorch</div><div class="skill-card-sub">Neural Network</div></div>
+            </div>
+
+          </div>
+        </div>
+
+        <div>
+          <div class="skill-group-label">araçlar &amp; platformlar</div>
+          <div class="skills-wrap">
+
+            <div class="skill-card">
+              <div class="skill-icon" style="background:#22314E;">
+                <svg viewBox="0 0 24 24" fill="#fff"><path d="M13.89 4.925l2.913 2.913-2.913 2.912-2.912-2.912zm0 9.338l2.913 2.912-2.913 2.913-2.912-2.913zM9.338 9.338l2.912 2.912-2.912 2.913-2.913-2.913zm9.324 0l2.913 2.912-2.913 2.913-2.912-2.913zM4.925 4.925l2.913 2.913-2.913 2.912L2.012 9.838zM2.012 0L4.925 2.913 2.012 5.826 0 3.913z"/></svg>
+              </div>
+              <div><div class="skill-card-name">ROS</div><div class="skill-card-sub">Robot OS</div></div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-icon" style="background:#FCC624;">
+                <svg viewBox="0 0 24 24" fill="#000"><path d="M12 0C5.374 0 0 5.373 0 12c0 6.628 5.374 12 12 12 6.628 0 12-5.372 12-12 0-6.627-5.372-12-12-12zm4.793 6.793l-6.5 11.5L4.5 12.5l1.5-1.5 4.293 4.293 5.5-9.5 1 1z"/></svg>
+              </div>
+              <div><div class="skill-card-name">Linux</div><div class="skill-card-sub">Ubuntu</div></div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-icon" style="background:#F05032;">
+                <svg viewBox="0 0 24 24" fill="#fff"><path d="M23.546 10.93L13.067.452a1.55 1.55 0 0 0-2.188 0L8.708 2.627l2.76 2.76a1.838 1.838 0 0 1 2.327 2.341l2.658 2.66a1.838 1.838 0 0 1 1.9 3.039 1.837 1.837 0 0 1-2.6-2.597l-2.484-2.488v6.543a1.838 1.838 0 0 1 .484 3.583 1.838 1.838 0 0 1-2.293-1.77 1.838 1.838 0 0 1 1.006-1.622V8.975a1.837 1.837 0 0 1-1.006-1.621A1.838 1.838 0 0 1 10.35 5.6L7.643 2.89 .45 10.084a1.55 1.55 0 0 0 0 2.189l10.48 10.477a1.55 1.55 0 0 0 2.187 0l10.428-10.427a1.55 1.55 0 0 0 0-2.393z"/></svg>
+              </div>
+              <div><div class="skill-card-name">Git</div><div class="skill-card-sub">Versiyon Kontrol</div></div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-icon" style="background:#2496ED;">
+                <svg viewBox="0 0 24 24" fill="#fff"><path d="M13.983 11.078h2.119a.186.186 0 0 0 .186-.185V9.006a.186.186 0 0 0-.186-.186h-2.119a.185.185 0 0 0-.185.185v1.888c0 .102.083.185.185.185m-2.954-5.43h2.118a.186.186 0 0 0 .186-.186V3.574a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.185m0 2.716h2.118a.187.187 0 0 0 .186-.186V6.29a.186.186 0 0 0-.186-.185h-2.118a.185.185 0 0 0-.185.185v1.887c0 .102.082.185.185.186m-2.93 0h2.12a.186.186 0 0 0 .184-.186V6.29a.185.185 0 0 0-.185-.185H8.1a.185.185 0 0 0-.185.185v1.887c0 .102.083.185.185.186m-2.964 0h2.119a.186.186 0 0 0 .185-.186V6.29a.185.185 0 0 0-.185-.185H5.136a.186.186 0 0 0-.186.185v1.887c0 .102.084.185.186.186m5.893 2.715h2.118a.186.186 0 0 0 .186-.185V9.006a.186.186 0 0 0-.186-.186h-2.118a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.185m2.93 0h2.12a.186.186 0 0 0 .184-.185V9.006a.186.186 0 0 0-.185-.186h-2.119a.185.185 0 0 0-.185.185v1.888c0 .102.083.185.185.185M8.102 7.893H5.979a.185.185 0 0 0-.185.186v1.887c0 .102.083.185.185.185H8.1a.186.186 0 0 0 .186-.185V8.079a.186.186 0 0 0-.185-.186m0 2.715H5.979a.185.185 0 0 0-.185.185v1.888c0 .102.083.185.185.185H8.1a.186.186 0 0 0 .186-.185v-1.888a.186.186 0 0 0-.185-.185m5.896 0H11.88a.185.185 0 0 0-.185.185v1.888c0 .102.082.185.185.185h2.118a.186.186 0 0 0 .186-.185v-1.888a.186.186 0 0 0-.186-.185M.415 22.275l-.004.02a1.12 1.12 0 0 0 1.098 1.34h21.044a1.12 1.12 0 0 0 1.098-1.34l-1.91-8.955H2.327z"/></svg>
+              </div>
+              <div><div class="skill-card-name">Docker</div><div class="skill-card-sub">Container</div></div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-icon" style="background:#03234B;">
+                <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 0L1.605 6v12L12 24l10.395-6V6zm0 1.155l9.255 5.346v10.498L12 22.5l-9.255-5.501V6.5zM6.005 8.565v6.872l5.996 3.46 5.997-3.46V8.565l-5.997-3.46z"/></svg>
+              </div>
+              <div><div class="skill-card-name">STM32</div><div class="skill-card-sub">Gömülü Sistem</div></div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-icon" style="background:#6DB33F;">
+                <svg viewBox="0 0 24 24" fill="#fff"><path d="M20.205 16.392c-2.469 3.289-7.741 2.179-11.122 2.338 0 0-.599.034-1.201.133 0 0 .228-.097.519-.198 2.374-.821 3.496-.986 4.939-1.727 2.71-1.388 5.408-4.413 5.957-7.555-1.032 3.022-4.17 5.623-7.027 6.679-1.955.722-5.492 1.424-5.493 1.424a5.28 5.28 0 0 1-.143-.076c-2.405-1.17-2.475-6.38 1.894-8.059 1.916-.736 3.747-.332 5.818-.825 2.208-.525 4.766-2.18 5.805-4.344 1.165 3.458 2.565 8.866.054 12.21z"/></svg>
+              </div>
+              <div><div class="skill-card-name">Spring Boot</div><div class="skill-card-sub">Java Framework</div></div>
+            </div>
+
+            <div class="skill-card">
+              <div class="skill-icon" style="background:#CC2927;">
+                <svg viewBox="0 0 24 24" fill="#fff"><path d="M11.46 0C5.129 0 0 5.13 0 11.46c0 6.333 5.13 11.463 11.46 11.463 6.332 0 11.463-5.13 11.463-11.462C22.923 5.13 17.792 0 11.46 0zm4.685 16.978a.81.81 0 0 1-1.143.076L11.46 13.4l-3.54 3.655a.81.81 0 0 1-1.143-.076.81.81 0 0 1 .076-1.142l3.628-3.745-3.628-3.744a.81.81 0 0 1-.076-1.142.81.81 0 0 1 1.143.076l3.54 3.655 3.54-3.655a.81.81 0 0 1 1.143-.076.81.81 0 0 1-.076 1.142L12.49 12.09l3.628 3.745a.81.81 0 0 1 .027 1.142z"/></svg>
+              </div>
+              <div><div class="skill-card-name">MS SQL Server</div><div class="skill-card-sub">Veritabanı</div></div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="section-label">iletişim</div>
+
+      <h2 class="contact-cta">Birlikte bir şeyler<br>üretelim <span>→</span></h2>
+      <p class="contact-sub">Staj fırsatları, proje iş birlikleri veya teknik sorular için ulaşabilirsiniz. Otonom sistemler, AI/ML ve yazılım geliştirme üzerine konuşmaktan mutluluk duyarım.</p>
+
+      <a href="mailto:yilmazbeyzza@gmail.com" class="contact-email">
+        ✉ yilmazbeyzza@gmail.com
+      </a>
+
+      <div class="contact-links-row">
+        <a href="https://github.com/beyzayilmz" target="_blank" class="contact-link-btn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="https://linkedin.com/in/beyza-yilmaz" target="_blank" class="contact-link-btn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </section>
+
+    <div class="footer-section">
+      <p class="footer-text">tasarım &amp; geliştirme · beyza yılmaz · 2025</p>
+    </div>
+
+  </main>
+
+  <script>
+    const rightPanel = document.querySelector('.right');
+
+    // Scroll progress bar
+    rightPanel.addEventListener('scroll', () => {
+      const el = document.getElementById('progress');
+      const pct = (rightPanel.scrollTop / (rightPanel.scrollHeight - rightPanel.clientHeight)) * 100;
+      el.style.width = pct + '%';
+    });
+
+    // Active nav highlight on scroll
+    const navLinks = document.querySelectorAll('.left-nav a');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(a => a.classList.remove('active'));
+          const active = document.querySelector(`.left-nav a[data-section="${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { root: rightPanel, rootMargin: '-40% 0px -55% 0px' });
+
+    document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
+
+    // Nav link clicks scroll inside right panel
+    document.querySelectorAll('.left-nav a').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+
+</body>
+</html>
